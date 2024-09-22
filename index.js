@@ -32,9 +32,9 @@ If the letter is not included, the #word-to-guess element should remain unchange
 
 
 
-var wordToGuess = document.getElementById('word-to-guess') // should display _ for each letter to start
+var wordToGuessDisplay = document.getElementById('word-to-guess') // should display _ for each letter to start
 var remainingGuessDisplay = document.getElementById('remaining-guesses')
-var incorrectLettersEl = document.getElementById('incorrect-letters')
+var incorrectLettersDisplay = document.getElementById('incorrect-letters')
 var previousWord = document.getElementById('previous-word')
 var winsEl = document.getElementById('wins')
 var lossesEl = document.getElementById('losses')
@@ -44,14 +44,14 @@ var correct = 0
 var incorrect = 0
 // 5:10 in lecture uses "score" element id and then global variables = 0 for "correct" and "incorrect"
 
-window.onload = function(chooseRandomWord) {
-  // randomly choose a word from the words array
-  randomWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
-  console.log(randomWord)
+window.onload = function(chooseWordToGuess) {
+  // pick a random word from the words array
+  wordToGuess = words[Math.floor(Math.random() * words.length)];
+  console.log(wordToGuess) 
 
   // display one _ for each letter
-  wordToGuess.textContent = ('_'.repeat(randomWord.length)); // ** looks right but not passing test
-  remainingGuessDisplay.textContent = '10'; // ** looks right but not passing test
+  wordToGuessDisplay.textContent = ('_'.repeat(wordToGuess.length)); // ** looks right but not passing test
+  remainingGuessDisplay.textContent = remainingGuesses; // ** looks right but not passing test
 }
 
 
@@ -60,32 +60,32 @@ window.onload = function(chooseRandomWord) {
 var letters = /^[A-Za-z]+$/
 // only allows letters to be input, case does not matter
 
-
 document.onkeyup = function(e) {
-  // do nothing when pressing invalid key - filter keypresses
+  // access user's keypress
   var key = e.key
-  if (e.key.match(letters))
-  console.log(e.key) // access user's keypress
+  // if key pressed is a letter
+  if (e.key.match(letters)) {  
+  console.log(e.key) 
+    // if key pressed is a letter AND letter is correct
+    if (wordToGuess.includes(key)) {  // compare picked letter with word's letters
+        // show correct letter in wordToGuessDisplay
+        // display remaining guesses
+        //need to display correct letter in the word instead of _
+    } else {
+        // increment and show incorrect letter
+        (remainingGuesses)-- //-1 guess remgaining
+        remainingGuessDisplay.textContent = remainingGuesses; // display remaining guesses
+        console.log(remainingGuesses)
+        incorrectLettersDisplay.textContent = e.key //shows last letter guessed
+        // ** troubleshoot - want to keep all previous incorrect letter guesses on display
+    }
 
-  console.log(randomWord)  // pick a random word from the words array
-  
-  if (randomWord.includes(key)) {  // compare picked letter with word's letters
-      // increment correct
-      remainingGuesses-- // -1 guess remaining
-      console.log(remainingGuesses) 
-      // ** need to display remaining guesses
-      //need to display correct letter in the word instead of _
+    // show previous word
+    // show number of wins/losses
+    // show remianing guess out of 10
+
+      // if key pressed is NOT a letter
   } else {
-      // increment and show incorrect letter
-      remainingGuesses-- //-1 guess remaining
-      console.log(remainingGuesses) 
-      // ** need to display remaining guesses
-      incorrectLettersEl.textContent = key //shows last letter guessed
-      // ** troubleshoot above - currently will display all characters, not just letters
-      // ** troubleshoot - want to keep all previous incorrect letter guesses on display
+    //do nothing
   }
-
-  // show previous word
-  // show number of wins/losses
-  // show remianing guess out of 10
 }
