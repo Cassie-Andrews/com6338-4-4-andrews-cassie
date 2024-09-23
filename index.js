@@ -76,7 +76,7 @@ function whenKeyPressed(e) { // access user's keypress
     }
   }
 
-  // if letter entered was CORRECT
+  // CORRECT letter was entered
   if (letterFound) { 
     document.getElementById('word-to-guess').textContent = displayedWord.join(''); // The letter should replace the underscores in the wordToGuess with all instances of that letter. Join() to put array back into a string with the updated letter(s).
 
@@ -88,18 +88,22 @@ function whenKeyPressed(e) { // access user's keypress
         document.getElementById('wins').textContent = wins; // display '1' in the #WINS element
       }
   
-  // if letter entered was INCORRECT        
+  // INCORRECT letter was entered
   } else {
-    // the incorrectly-guessed letter should be added to the #incorrect-letters element 
+    incorrectLetters = letter; 
+    document.getElementById('incorrect-letters').textContent = incorrectLetters; // the incorrectly-guessed letter should be added to the #incorrect-letters element 
     // incorrectLetters.textContent = letter;
-      // the #remaining-guesses element should reflect one fewer remaining guess
+    // the #remaining-guesses element should reflect one fewer remaining guess
     remainingGuesses--;
     console.log("Guesses remaining:", remainingGuesses);
     document.getElementById('remaining-guesses').textContent = remainingGuesses;
-      // CHECK FOR LOSS: if remaining guesses=0 then the user LOST
-         // 1. count a LOSS
-         // 2. display '1' in the #LOSSES element.
+    
+    // CHECK FOR LOSS: if remaining guesses=0 then the user LOST
+      // 1. count a LOSS
+      // 2. display '1' in the #LOSSES element.
   } 
+
+
       // when the game ends from an incorrect final guess (LOSS) OR a correct final guess (WIN) it should RESET
          // 3. The game should immediately proceed to the next randomly-chosen word
          // 4. the game should reset the following elements: 
