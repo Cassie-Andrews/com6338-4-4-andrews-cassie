@@ -81,16 +81,17 @@ function whenKeyPressed(e) { // access user's keypress
     document.getElementById('word-to-guess').textContent = displayedWord.join(''); // The letter should replace the underscores in the wordToGuess with all instances of that letter. Join() to put array back into a string with the updated letter(s).
 
       // CHECK FOR WIN:
-      // if the user guesses the last letter CORRECTLY there will be no more _ in the displayedWord (use ! for 'not')
-      if (!displayedWord.includes('_')) { 
+      // if the user guesses the last letter CORRECTLY there will be no more _ in the displayedWord 
+      if (!displayedWord.includes('_')) { // use ! for 'not'
         wins++; // count +1 to wins
         console.log(wins, "wins"); // test
         document.getElementById('wins').textContent = wins; // display '1' in the #WINS element
+        document.getElementById('previous-word').textContent = wordToGuess; // add word to previousWord display
       }
   
   // INCORRECT letter was entered
   } else {
-    incorrectLetters.push(letter); // <---fix this! needs to be an array vs a string
+    incorrectLetters.push(letter); // push letter to add it to an array
     console.log("Incorrect letters:", incorrectLetters);
     document.getElementById('incorrect-letters').textContent = incorrectLetters.join(', '); // the incorrectly-guessed letter should be added to the #incorrect-letters element 
     // incorrectLetters.textContent = letter;
@@ -102,6 +103,7 @@ function whenKeyPressed(e) { // access user's keypress
     // CHECK FOR LOSS: if remaining guesses=0 then the user LOST
       // 1. count a LOSS
       // 2. display '1' in the #LOSSES element.
+      
   } 
 
 
