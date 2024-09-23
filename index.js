@@ -10,7 +10,7 @@ var words = [
   'meatloaf', //8
   'ukulele', //9
   'mango' //10
-]
+];
 
 // NO EDITS ABOVE THIS POINT! //
 
@@ -24,7 +24,7 @@ var losses = 0;
 window.onload = startGame;
 
 function startGame() {
-  /*** ACTION: When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
+  /*** When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
   wordToGuess = words[Math.floor(Math.random() * words.length)];
   console.log("Word to guess:", wordToGuess);
   console.log("Number of letters:", wordToGuess.length);
@@ -47,18 +47,30 @@ document.onkeyup = whenKeyPressed;
 // access user's keypress
 function whenKeyPressed(e) {
   var letter = e.key.toUpperCase();
+  console.log(letter)
 
 /*** if the keypress is NOT a letter then do nothing */
   if (!/^[A-Z]$/.test(letter)) { // !=not ^=start of string [A-Z]=uppercase letter $=end of string
     return;
   }
   
-  /*** if the keypress IS a letter */
+  /*** check if key pressed is in the wordToGuess */
+  let letterFound = false;
+  /** When the user presses a letter key, your code should loop to compare picked letter with word's letters */
+  for (let i=0; i < wordToGuess.length; i++) { //for loop iterates over the letters in the wordToGuess
+    
+    if (wordToGuess[i].includes(letter)) { //if a character in the wordToGuess matches the user's key press
+      letterFound = true; //then letterFound = true
+    }
   }
+  console.log(letterFound);
+}
   // check if key pressed is a letter
+  /** if the letter is CORRECT */
+  /* the letter should replace the underscores in the displayed word (displayed in the #word-to-guess element) with all instances of that letter. */
   // if the user presses a non-letter key or an incorrect letter key repeatedly, there should be NO changes to the game state.
   
-/*** ACTION: When the user presses a letter key, your code should loop to compare picked letter with word's letters
+/*** ACTION: 
    * If the letter is CORRECT...
       * the letter should replace the underscores in the displayed word (displayed in the #word-to-guess element) with all instances of that letter. 
    * If the letter is INCORRECT...
