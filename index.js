@@ -26,17 +26,18 @@ window.onload = startGame;
 function startGame() {
   /*** ACTION: When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
   wordToGuess = words[Math.floor(Math.random() * words.length)];
-  console.log(wordToGuess)
-  console.log(wordToGuess.length) 
+  console.log("Word to guess:", wordToGuess);
+  console.log("Number of letters:", wordToGuess.length);
   remainingGuesses = 10;
+  console.log("Guesses remaining:", remainingGuesses);
   /** The game should also display ten remaining guesses in the #remaining-guesses element. */ 
   incorrectLetters = [];
 
   // references for elements in HTML doc
   document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
-  document.getElementById('previous-word').textContent = '';
-  document.getElementById('incorrect-letters').textContent = incorrectLetters;
-  document.getElementById('remaining-guesses').textContent = remainingGuesses;
+  document.getElementById('previous-word').textContent = ''; //placeholder
+  document.getElementById('incorrect-letters').textContent = ''; //placeholder
+  document.getElementById('remaining-guesses').textContent = remainingGuesses; //start at 10
   document.getElementById('wins').textContent = wins;
   document.getElementById('losses').textContent = losses;
   // do i need an event listener here? or do i just use document.onkeyup ? ;
@@ -45,13 +46,14 @@ function startGame() {
 document.onkeyup = whenKeyPressed;
 // access user's keypress
 function whenKeyPressed(e) {
-  var letter = event.key.toUpperCase();
+  var letter = e.key.toUpperCase();
 
 /*** if the keypress is NOT a letter then do nothing */
   if (!/^[A-Z]$/.test(letter)) { // !=not ^=start of string [A-Z]=uppercase letter $=end of string
     return;
   }
   
+  /*** if the keypress IS a letter */
   }
   // check if key pressed is a letter
   // if the user presses a non-letter key or an incorrect letter key repeatedly, there should be NO changes to the game state.
