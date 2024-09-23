@@ -91,9 +91,11 @@ function whenKeyPressed(e) { // access user's keypress
   // if letter entered was INCORRECT        
   } else {
     // the incorrectly-guessed letter should be added to the #incorrect-letters element 
-    incorrectLetters.textContent = letter;
+    // incorrectLetters.textContent = letter;
       // the #remaining-guesses element should reflect one fewer remaining guess
-      //// remainingGuesses.textContent = remainingGuesses--;
+    remainingGuesses--;
+    console.log("Guesses remaining:", remainingGuesses);
+    document.getElementById('remaining-guesses').textContent = remainingGuesses;
       // CHECK FOR LOSS: if remaining guesses=0 then the user LOST
          // 1. count a LOSS
          // 2. display '1' in the #LOSSES element.
