@@ -90,7 +90,7 @@ function whenKeyPressed(e) { // access user's keypress
   
   // INCORRECT letter was entered
   } else {
-    incorrectLetters = letter; // <---fix this!
+    incorrectLetters.push(letter); // <---fix this! needs to be an array vs a string
     console.log("Incorrect letters:", incorrectLetters);
     document.getElementById('incorrect-letters').textContent = incorrectLetters.join(', '); // the incorrectly-guessed letter should be added to the #incorrect-letters element 
     // incorrectLetters.textContent = letter;
