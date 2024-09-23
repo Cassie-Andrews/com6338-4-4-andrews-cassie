@@ -62,11 +62,11 @@ function whenKeyPressed(e) { // access user's keypress
   }
 
 /*** if keypress is a letter and letter has not been guessed then check if it is in the wordToGuess */
-  let letterFound = false;
-  let displayedWord = document.getElementById('word-to-guess').textContent.split(''); // convert string to an array to target each character
+  var letterFound = false;
+  var displayedWord = document.getElementById('word-to-guess').textContent.split(''); // convert string to an array to target each character
   console.log(displayedWord)
   /** When the user presses a letter key, your code should loop to compare picked letter with word's letters */
-  for (let i=0; i < wordToGuess.length; i++) { //for loop iterates over the letters [i] in the wordToGuess
+  for (var i=0; i < wordToGuess.length; i++) { //for loop iterates over the letters [i] in the wordToGuess
     if (wordToGuess[i] === letter) { //if a character in the wordToGuess matches the user's key press
       letterFound = true; //then letterFound = true for each occurance of the letter
       console.log(letterFound);
@@ -75,7 +75,7 @@ function whenKeyPressed(e) { // access user's keypress
   }
 
   if (letterFound) { // If the user guessed a letter CORRECTLY
-    document.getElementById('word-to-guess').textContent = letter; // The letter should replace the underscores in the wordToGuess with all instances of that letter.
+    document.getElementById('word-to-guess').textContent = displayedWord; // The letter should replace the underscores in the wordToGuess with all instances of that letter.
   } else { // Otherwise (letter guessed INCORRECTLY)
     // the #word-to-guess element should remain unchanged
     incorrectLetters.textContent = letter; // the incorrectly-guessed letter should be added to the #incorrect-letters element
