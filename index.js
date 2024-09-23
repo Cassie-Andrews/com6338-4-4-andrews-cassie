@@ -103,7 +103,7 @@ function whenKeyPressed(e) { // access user's keypress
       losses++;// count +1 to losses
       console.log(losses, "losses");
       document.getElementById('losses').textContent = losses; // display '1' in the #LOSSES element.
-      // display wordToGuess in previousWord
+      document.getElementById('previous-word').textContent = wordToGuess; // display wordToGuess in previousWord
     }
 
   } 
