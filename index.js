@@ -17,11 +17,9 @@ var words = [
 
 
 
-// The game should also display ten remaining guesses in the #remaining-guesses element.
 
-/* When the user presses a letter key, your code should check whether the letter is included in the word. 
 
-If the letter is included, it should replace the underscores in the displayed word (displayed in the #word-to-guess element) with the instances of that letter. 
+/* If the letter is included, it should replace the underscores in the displayed word (displayed in the #word-to-guess element) with the instances of that letter. 
 
 If the letter is not included, the #word-to-guess element should remain unchanged, but the incorrectly-guessed letter should be added to the #incorrect-letters element and the #remaining-guesses element should reflect one fewer remaining guess. */
 
@@ -52,37 +50,36 @@ function startGame() {
   wordToGuess = words[Math.floor(Math.random() * words.length)]; // calc # of letters in wordToGuess
   console.log(wordToGuess)
   console.log(wordToGuess.length) 
-  remainingGuesses == 10;
+  remainingGuesses = 10;
   // should display 10 guesses at game start
   incorrectLetters = [];
 
-  document.getElementById('word-to-guess').textContent == '_'.repeat(wordToGuess.length); // display one _ for each letter
+  document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
   document.getElementById('previous-word').textContent = '';
   document.getElementById('incorrect-letters').textContent = incorrectLetters;
   document.getElementById('remaining-guesses').textContent = remainingGuesses;
   document.getElementById('wins').textContent = wins;
   document.getElementById('losses').textContent = losses;
+
+  document.addEventListener('keyup', analyzeKeyUp);
 }
 
-
-
-
-var letters = /^[A-Za-z]+$/
 // only allows letters to be input, case does not matter
 
-document.onkeyup = function(e) {
+function analyzeKeyUp(e) {
   // access user's keypress
-  var letter = e.key.toUpperCase();
+  var letter = e.key;
+  console.log(letter.toUpperCase())
   
   // if key pressed is a letter
-  if (e.key.match(letters)) {  
-  console.log(e.key) 
+  if (!/^[A-Za-z]+$/.test(letter)) {  
+ 
+  }
+  // When the user presses a letter key, your code should check whether the letter is included in the word. 
     // if key pressed is a letter AND letter is correct
     if (wordToGuess.includes(letter)) {
       for (i=0; i < wordToGuess.length; i++) { // loop to compare picked letter with word's letters
-        if (e.key === wordToGuess.letters[i].character) {
-          wordToGuess.underscores[i] = e.key.toUpperCase();
-        }
+
         // ** need to show correct letter in wordToGuessDisplay
         // display remaining guesses
         //need to display correct letter in the word instead of _
@@ -98,10 +95,9 @@ document.onkeyup = function(e) {
 
     // show previous word
     // show number of wins/losses
-    // show remianing guess out of 10
+    // The game should also display ten remaining guesses in the #remaining-guesses element.
 
-      // if key pressed is NOT a letter
-  } else {
-    //do nothing
+
+    // if key pressed is NOT a letter
   }
-}
+  
