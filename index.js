@@ -28,10 +28,11 @@ If the letter is not included, the #word-to-guess element should remain unchange
 
 /* When the user presses the last correct letter, the game should count a win and display '1' in the #wins element. The game should immediately proceed to the next randomly-chosen word and reset all of the other elements: incorrect letters should be blank, remaining guesses should show '10', and the #previous-word element should display the previous word 
 
- if the user had run out of remaining guesses before guessing the word, the game would also proceed to the next game and show an increase in losses instead of wins. */
+if the user had run out of remaining guesses before guessing the word, the game would also proceed to the next game and show an increase in losses instead of wins. */
 
 
 
+/*
 var wordToGuessDisplay = document.getElementById('word-to-guess') // should display _ for each letter to start
 var remainingGuessDisplay = document.getElementById('remaining-guesses')
 var incorrectLettersDisplay = document.getElementById('incorrect-letters')
@@ -43,15 +44,26 @@ var remainingGuesses = 10
 var correct = 0
 var incorrect = 0
 // 5:10 in lecture uses "score" element id and then global variables = 0 for "correct" and "incorrect"
+*/
 
-window.onload = function(chooseWordToGuess) {
+var wordToGuess = '';
+var remainingGuesses = 10;
+var incorrectLetters = [];
+var wins = 0;
+var losses = 0;
+
+
+window.onload = function(startGame) {
   // pick a random word from the words array
   wordToGuess = words[Math.floor(Math.random() * words.length)];
   console.log(wordToGuess) 
-
+  
   // display one _ for each letter
   wordToGuessDisplay.textContent = ('_'.repeat(wordToGuess.length)); // ** looks right but not passing test
   remainingGuessDisplay.textContent = remainingGuesses; // ** looks right but not passing test
+  incorrectLettersDisplay = [];
+
+
 }
 
 
@@ -67,10 +79,15 @@ document.onkeyup = function(e) {
   if (e.key.match(letters)) {  
   console.log(e.key) 
     // if key pressed is a letter AND letter is correct
-    if (wordToGuess.includes(key)) {  // compare picked letter with word's letters
-        // show correct letter in wordToGuessDisplay
+    if (wordToGuess.includes(key)) {
+      for (i=0; i < wordToGuess.length; i++) { // loop to compare picked letter with word's letters
+        if (e.key === wordToGuess.letters[i].character) {
+          wordToGuess.underscores[i] = e.key.toUpperCase();
+        }
+        // ** need to show correct letter in wordToGuessDisplay
         // display remaining guesses
         //need to display correct letter in the word instead of _
+      }
     } else {
         // increment and show incorrect letter
         (remainingGuesses)-- //-1 guess remgaining
