@@ -87,7 +87,6 @@ function whenKeyPressed(e) { // access user's keypress
         document.getElementById('wins').textContent = wins; // display '1' in the #WINS element
         document.getElementById('previous-word').textContent = wordToGuess; // add wordToGuess to previousWord display
         startGame(); // restart game
-        // ERROR the #previous-word element should display the previous word even after reset
       }
   
   // INCORRECT letter was entered
@@ -106,12 +105,8 @@ function whenKeyPressed(e) { // access user's keypress
       document.getElementById('losses').textContent = losses; // display '1' in the #LOSSES element.
       document.getElementById('previous-word').textContent = wordToGuess; // display wordToGuess in previousWord
       startGame(); // restart game
-      // ERROR the #previous-word element should display the previous word even after reset
     }
   } 
-
-         
-  
 }
 
 
