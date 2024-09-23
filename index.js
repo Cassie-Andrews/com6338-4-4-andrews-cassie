@@ -85,7 +85,7 @@ function whenKeyPressed(e) { // access user's keypress
       if (!displayedWord.includes('_')) { 
         wins++; // count +1 to wins
         console.log(wins, "wins"); // test
-        // display '1' in the #WINS element
+        document.getElementById('wins').textContent = wins; // display '1' in the #WINS element
       }
   
   // if letter entered was INCORRECT        
