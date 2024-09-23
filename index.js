@@ -25,7 +25,7 @@ window.onload = startGame;
 
 function startGame() {
   /*** When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
-  wordToGuess = words[Math.floor(Math.random() * words.length)];
+  wordToGuess = words[Math.floor(Math.random() * words.length)].toUpperCase();
   console.log("Word to guess:", wordToGuess);
   console.log("Number of letters:", wordToGuess.length);
   remainingGuesses = 10;
@@ -59,7 +59,7 @@ function whenKeyPressed(e) {
   /** When the user presses a letter key, your code should loop to compare picked letter with word's letters */
   for (let i=0; i < wordToGuess.length; i++) { //for loop iterates over the letters in the wordToGuess
     
-    if (wordToGuess[i].includes(letter)) { //if a character in the wordToGuess matches the user's key press
+    if (wordToGuess[i] === (letter)) { //if a character in the wordToGuess matches the user's key press
       letterFound = true; //then letterFound = true
     }
   }
