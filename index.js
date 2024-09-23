@@ -86,24 +86,26 @@ function whenKeyPressed(e) { // access user's keypress
         wins++; // count +1 to wins
         console.log(wins, "wins"); // test
         document.getElementById('wins').textContent = wins; // display '1' in the #WINS element
-        document.getElementById('previous-word').textContent = wordToGuess; // add word to previousWord display
+        document.getElementById('previous-word').textContent = wordToGuess; // add wordToGuess to previousWord display
       }
   
   // INCORRECT letter was entered
   } else {
     incorrectLetters.push(letter); // push letter to add it to an array
     console.log("Incorrect letters:", incorrectLetters);
-    document.getElementById('incorrect-letters').textContent = incorrectLetters.join(', '); // the incorrectly-guessed letter should be added to the #incorrect-letters element 
-    // incorrectLetters.textContent = letter;
-    
-    remainingGuesses--; // the #remaining-guesses element should reflect one fewer remaining guess
+    document.getElementById('incorrect-letters').textContent = incorrectLetters.join(', '); // the incorrectly-guessed letter should be added to the #incorrect-letters element   
+    remainingGuesses--; // remainingGuesses var should reflect one fewer remaining guess
     console.log("Guesses remaining:", remainingGuesses);
-    document.getElementById('remaining-guesses').textContent = remainingGuesses;
+    document.getElementById('remaining-guesses').textContent = remainingGuesses; // the #remaining-guesses element should reflect one fewer remaining guess
     
-    // CHECK FOR LOSS: if remaining guesses=0 then the user LOST
-      // 1. count a LOSS
-      // 2. display '1' in the #LOSSES element.
-      
+    // CHECK FOR LOSS
+    if (remainingGuesses === 0) { //if remaining guesses=0 then the user LOST
+      losses++;// count +1 to losses
+      console.log(losses, "losses");
+      document.getElementById('losses').textContent = losses; // display '1' in the #LOSSES element.
+      // display wordToGuess in previousWord
+    }
+
   } 
 
 
