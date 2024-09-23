@@ -15,10 +15,9 @@ var words = [
 // NO EDITS ABOVE THIS POINT //
 
 
-/* When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
+
 
 // The game should also display ten remaining guesses in the #remaining-guesses element.
-
 
 /* When the user presses a letter key, your code should check whether the letter is included in the word. 
 
@@ -32,19 +31,11 @@ if the user had run out of remaining guesses before guessing the word, the game 
 
 
 
-/*
-var wordToGuessDisplay = document.getElementById('word-to-guess') // should display _ for each letter to start
-var remainingGuessDisplay = document.getElementById('remaining-guesses')
-var incorrectLettersDisplay = document.getElementById('incorrect-letters')
-var previousWord = document.getElementById('previous-word')
-var winsEl = document.getElementById('wins')
-var lossesEl = document.getElementById('losses')
 
-var remainingGuesses = 10
-var correct = 0
-var incorrect = 0
+// should display _ for each letter to start
+
+
 // 5:10 in lecture uses "score" element id and then global variables = 0 for "correct" and "incorrect"
-*/
 
 var wordToGuess = '';
 var remainingGuesses = 10;
@@ -52,34 +43,42 @@ var incorrectLetters = [];
 var wins = 0;
 var losses = 0;
 
+window.onload = startGame;
+/* When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
 
-window.onload = function(startGame) {
+
+function startGame() {
   // pick a random word from the words array
-  wordToGuess = words[Math.floor(Math.random() * words.length)];
-  console.log(wordToGuess) 
-  
-  // display one _ for each letter
-  wordToGuessDisplay.textContent = ('_'.repeat(wordToGuess.length)); // ** looks right but not passing test
-  remainingGuessDisplay.textContent = remainingGuesses; // ** looks right but not passing test
-  incorrectLettersDisplay = [];
+  wordToGuess = words[Math.floor(Math.random() * words.length)]; // calc # of letters in wordToGuess
+  console.log(wordToGuess)
+  console.log(wordToGuess.length) 
+  remainingGuesses == 10;
+  // should display 10 guesses at game start
+  incorrectLetters = [];
 
-
+  document.getElementById('word-to-guess').textContent == '_'.repeat(wordToGuess.length); // display one _ for each letter
+  document.getElementById('previous-word').textContent = '';
+  document.getElementById('incorrect-letters').textContent = incorrectLetters;
+  document.getElementById('remaining-guesses').textContent = remainingGuesses;
+  document.getElementById('wins').textContent = wins;
+  document.getElementById('losses').textContent = losses;
 }
 
 
-// should display 10 guesses at game start
+
 
 var letters = /^[A-Za-z]+$/
 // only allows letters to be input, case does not matter
 
 document.onkeyup = function(e) {
   // access user's keypress
-  var key = e.key
+  var letter = e.key.toUpperCase();
+  
   // if key pressed is a letter
   if (e.key.match(letters)) {  
   console.log(e.key) 
     // if key pressed is a letter AND letter is correct
-    if (wordToGuess.includes(key)) {
+    if (wordToGuess.includes(letter)) {
       for (i=0; i < wordToGuess.length; i++) { // loop to compare picked letter with word's letters
         if (e.key === wordToGuess.letters[i].character) {
           wordToGuess.underscores[i] = e.key.toUpperCase();
@@ -91,9 +90,9 @@ document.onkeyup = function(e) {
     } else {
         // increment and show incorrect letter
         (remainingGuesses)-- //-1 guess remgaining
-        remainingGuessDisplay.textContent = remainingGuesses; // display remaining guesses
+        remainingGuesses.textContent = remainingGuesses; // display remaining guesses
         console.log(remainingGuesses)
-        incorrectLettersDisplay.textContent = e.key //shows last letter guessed
+        incorrectLetters.textContent = e.key //shows last letter guessed
         // ** troubleshoot - want to keep all previous incorrect letter guesses on display
     }
 
