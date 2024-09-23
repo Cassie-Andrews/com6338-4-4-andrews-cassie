@@ -10,7 +10,7 @@ var words = [
   'meatloaf', //8
   'ukulele', //9
   'mango' //10
-];
+]
 
 // NO EDITS ABOVE THIS POINT! //
 
@@ -35,7 +35,6 @@ function startGame() {
 
   // STARTING GAME STATE
   document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
-  document.getElementById('previous-word').textContent = ''; //placeholder
   document.getElementById('incorrect-letters').textContent = ''; //placeholder
   document.getElementById('remaining-guesses').textContent = remainingGuesses; //start at 10
   document.getElementById('wins').textContent = wins;
@@ -87,6 +86,8 @@ function whenKeyPressed(e) { // access user's keypress
         console.log(wins, "wins"); // test
         document.getElementById('wins').textContent = wins; // display '1' in the #WINS element
         document.getElementById('previous-word').textContent = wordToGuess; // add wordToGuess to previousWord display
+        startGame(); // restart game
+        // ERROR the #previous-word element should display the previous word even after reset
       }
   
   // INCORRECT letter was entered
@@ -104,17 +105,12 @@ function whenKeyPressed(e) { // access user's keypress
       console.log(losses, "losses");
       document.getElementById('losses').textContent = losses; // display '1' in the #LOSSES element.
       document.getElementById('previous-word').textContent = wordToGuess; // display wordToGuess in previousWord
+      startGame(); // restart game
+      // ERROR the #previous-word element should display the previous word even after reset
     }
-
   } 
 
-
-      // when the game ends from an incorrect final guess (LOSS) OR a correct final guess (WIN) it should RESET
-         // 3. The game should immediately proceed to the next randomly-chosen word
-         // 4. the game should reset the following elements: 
-         // 4a incorrect letters should be blank
-         // 4b remaining guesses should show '10'
-         // 4c the #previous-word element should display the previous word
+         
   
 }
 
