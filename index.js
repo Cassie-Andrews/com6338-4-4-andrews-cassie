@@ -40,43 +40,55 @@ function startGame() {
   document.getElementById('remaining-guesses').textContent = remainingGuesses; //start at 10
   document.getElementById('wins').textContent = wins;
   document.getElementById('losses').textContent = losses;
-  // do i need an event listener here? or do i just use document.onkeyup ? ;
+  // do i need an event listener here? or do i just use document.onkeyup to access user key presses? ;
 }
 
-document.onkeyup = whenKeyPressed;
-// access user's keypress
-function whenKeyPressed(e) {
-  var letter = e.key.toUpperCase();
-  console.log(letter)
 
+document.onkeyup = whenKeyPressed;
+
+function whenKeyPressed(e) { // access user's keypress
+  var letter = e.key.toUpperCase(); // key press converts to uppercase
+  console.log(letter) // test
+
+// check if key pressed is a letter...
 /*** if the keypress is NOT a letter then do nothing */
   if (!/^[A-Z]$/.test(letter)) { // !=not ^=start of string [A-Z]=uppercase letter $=end of string
     return;
   }
-  
-  /*** check if key pressed is in the wordToGuess */
+
+/*** otherwise, check if key pressed is in the wordToGuess */
   let letterFound = false;
   /** When the user presses a letter key, your code should loop to compare picked letter with word's letters */
   for (let i=0; i < wordToGuess.length; i++) { //for loop iterates over the letters in the wordToGuess
     
     if (wordToGuess[i] === (letter)) { //if a character in the wordToGuess matches the user's key press
-      letterFound = true; //then letterFound = true
+      letterFound = true; //then letterFound = true for each occurance of the letter
+      console.log(letterFound);
+      break; //end loop
     }
   }
-  console.log(letterFound);
+
+  
+
+  if (letterFound) { // If the user guessed a letter CORRECTLY
+    wordToGuess.textContent = letter; // The letter should replace the underscores in the wordToGuess with all instances of that letter.
+  } else { // Otherwise (letter guessed INCORRECTLY)
+    // the #word-to-guess element should remain unchanged
+    // the incorrectly-guessed letter should be added to the #incorrect-letters element
+    incorrectLetters.textContent = letter; //shows last letter guessed
+  }
+
+
 }
-  // check if key pressed is a letter
   /** if the letter is CORRECT */
-  /* the letter should replace the underscores in the displayed word (displayed in the #word-to-guess element) with all instances of that letter. */
+
   // if the user presses a non-letter key or an incorrect letter key repeatedly, there should be NO changes to the game state.
   
 /*** ACTION: 
    * If the letter is CORRECT...
       * the letter should replace the underscores in the displayed word (displayed in the #word-to-guess element) with all instances of that letter. 
    * If the letter is INCORRECT...
-      * the #word-to-guess element should remain unchanged
-      * the incorrectly-guessed letter should be added to the #incorrect-letters element
-            ////incorrectLetters.textContent = e.key //shows last letter guessed
+
       * the #remaining-guesses element should reflect one fewer remaining guess. */
            ////(remainingGuesses)-- //-1 guess remgaining
            ////remainingGuesses.textContent = remainingGuesses; // display remaining guesses
