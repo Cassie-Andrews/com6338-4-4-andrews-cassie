@@ -75,7 +75,7 @@ function whenKeyPressed(e) { // access user's keypress
   }
 
   if (letterFound) { // If the user guessed a letter CORRECTLY
-    document.getElementById('word-to-guess').textContent = displayedWord; // The letter should replace the underscores in the wordToGuess with all instances of that letter.
+    document.getElementById('word-to-guess').textContent = displayedWord.join(''); // The letter should replace the underscores in the wordToGuess with all instances of that letter.
   } else { // Otherwise (letter guessed INCORRECTLY)
     // the #word-to-guess element should remain unchanged
     incorrectLetters.textContent = letter; // the incorrectly-guessed letter should be added to the #incorrect-letters element
