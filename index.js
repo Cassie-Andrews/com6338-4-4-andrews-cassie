@@ -42,11 +42,17 @@ function startGame() {
   // do i need an event listener here? or do i just use document.onkeyup ? ;
 }
 
-document.onkeyup = keyPress;
+document.onkeyup = whenKeyPressed;
 // access user's keypress
-function keyPress(e) {
-  var letters = event.key.toUpperCase();
-  console.log(e.key) 
+function whenKeyPressed(e) {
+  var letter = event.key.toUpperCase();
+
+/*** if the keypress is NOT a letter then do nothing */
+  if (!/^[A-Z]$/.test(letter)) { // !=not ^=start of string [A-Z]=uppercase letter $=end of string
+    return;
+  }
+  
+  }
   // check if key pressed is a letter
   // if the user presses a non-letter key or an incorrect letter key repeatedly, there should be NO changes to the game state.
   
@@ -79,5 +85,5 @@ function keyPress(e) {
  * 4a incorrect letters should be blank
  * 4b remaining guesses should show 10
  * 4c the #previous-word element should display the previous word */
-  }
+  
   
