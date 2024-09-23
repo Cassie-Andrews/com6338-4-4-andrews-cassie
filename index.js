@@ -90,11 +90,12 @@ function whenKeyPressed(e) { // access user's keypress
   
   // INCORRECT letter was entered
   } else {
-    incorrectLetters = letter; 
-    document.getElementById('incorrect-letters').textContent = incorrectLetters; // the incorrectly-guessed letter should be added to the #incorrect-letters element 
+    incorrectLetters = letter; // <---fix this!
+    console.log("Incorrect letters:", incorrectLetters);
+    document.getElementById('incorrect-letters').textContent = incorrectLetters.join(', '); // the incorrectly-guessed letter should be added to the #incorrect-letters element 
     // incorrectLetters.textContent = letter;
-    // the #remaining-guesses element should reflect one fewer remaining guess
-    remainingGuesses--;
+    
+    remainingGuesses--; // the #remaining-guesses element should reflect one fewer remaining guess
     console.log("Guesses remaining:", remainingGuesses);
     document.getElementById('remaining-guesses').textContent = remainingGuesses;
     
