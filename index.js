@@ -33,14 +33,14 @@ function startGame() {
   /** The game should also display ten remaining guesses in the #remaining-guesses element. */ 
   incorrectLetters = [];
 
-  // references for elements in HTML doc
+  // STARTING GAME STATE
   document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
   document.getElementById('previous-word').textContent = ''; //placeholder
   document.getElementById('incorrect-letters').textContent = ''; //placeholder
   document.getElementById('remaining-guesses').textContent = remainingGuesses; //start at 10
   document.getElementById('wins').textContent = wins;
   document.getElementById('losses').textContent = losses;
-  // do i need an event listener here? or do i just use document.onkeyup to access user key presses? ;
+  // event listener here? or just use document.onkeyup to access user key presses like in lecture? ;
 }
 
 
@@ -49,69 +49,64 @@ document.onkeyup = whenKeyPressed;
 function whenKeyPressed(e) { // access user's keypress
   var letter = e.key.toUpperCase(); // key press converts to uppercase
 
+  // note: if user presses non-letter key or incorrect letter key repeatedly, there should be NO changes to the game state.
 
-// requirement: if the user presses a non-letter key or an incorrect letter key repeatedly, there should be NO changes to the game state.
-/*** if the keypress is NOT a letter then do nothing */
+  // Check if key press is a letter
   if (!/^[A-Z]$/.test(letter)) { // !=not ^=start of string [A-Z]=uppercase letter $=end of string
-    return;
+    return; // if key press is not a letter, do nothing
   }
   console.log(letter) // test
-// check if letter has been guessed already - if it is in the word or in the incorrect letters section
+
+  // Check if letter has been guessed 
   if (incorrectLetters.includes(letter) || document.getElementById('word-to-guess').textContent.includes(letter)) {
-    return;
+    return; // if letter found in the wordToGuess text OR incorrectLetters, do nothing
   }
 
-/*** if keypress is a letter and letter has not been guessed then check if it is in the wordToGuess */
+  // if keypress is a letter AND letter has not been guessed then check if it is in the wordToGuess
   var letterFound = false;
-  var displayedWord = document.getElementById('word-to-guess').textContent.split(''); // convert string to an array to target each character
+  var displayedWord = document.getElementById('word-to-guess').textContent.split(''); // use split('') to convert string to an array to target each character
   console.log(displayedWord)
-  /** When the user presses a letter key, your code should loop to compare picked letter with word's letters */
-  for (var i=0; i < wordToGuess.length; i++) { //for loop iterates over the letters [i] in the wordToGuess
-    if (wordToGuess[i] === letter) { //if a character in the wordToGuess matches the user's key press
-      letterFound = true; //then letterFound = true for each occurance of the letter
+
+  // When the user presses a letter key, your code should loop to compare picked letter with word's letters
+  for (var i=0; i < wordToGuess.length; i++) { // for loop iterates over the letters [i] in the wordToGuess
+    if (wordToGuess[i] === letter) { // if a character in the wordToGuess matches the user's key press
+      letterFound = true; // then letterFound = true for each occurance of the letter
       console.log(letterFound);
-      displayedWord[i] = letter; //_ change to letter
+      displayedWord[i] = letter; // corresponding _ in displayedWord will change to the correctly guessed letter
     }
   }
 
-  if (letterFound) { // If the user guessed a letter CORRECTLY
-    document.getElementById('word-to-guess').textContent = displayedWord.join(''); // The letter should replace the underscores in the wordToGuess with all instances of that letter.
-  } else { // Otherwise (letter guessed INCORRECTLY)
-    // the #word-to-guess element should remain unchanged
-    incorrectLetters.textContent = letter; // the incorrectly-guessed letter should be added to the #incorrect-letters element
-  // the #remaining-guesses element should reflect one fewer remaining guess.
-    remainingGuesses.textContent = remainingGuesses--
-  } 
+  // if letter entered was CORRECT
+  if (letterFound) { 
+    document.getElementById('word-to-guess').textContent = displayedWord.join(''); // The letter should replace the underscores in the wordToGuess with all instances of that letter. Join() to put array back into a string with the updated letter(s).
 
-
-}
-  /** if the letter is CORRECT */
-
+      // CHECK FOR WIN:
+      // if the user guesses the last letter CORRECTLY there will be no more _ in the displayedWord (use ! for 'not')
+      if (!displayedWord.includes('_')) { 
+        wins++; // count +1 to wins
+        console.log(wins, "wins"); // test
+        // display '1' in the #WINS element
+      }
   
-/*** ACTION: 
-   * If the letter is CORRECT...
-      * the letter should replace the underscores in the displayed word (displayed in the #word-to-guess element) with all instances of that letter. 
-   * If the letter is INCORRECT...
+  // if letter entered was INCORRECT        
+  } else {
+    // the incorrectly-guessed letter should be added to the #incorrect-letters element 
+    incorrectLetters.textContent = letter;
+      // the #remaining-guesses element should reflect one fewer remaining guess
+      //// remainingGuesses.textContent = remainingGuesses--;
+      // CHECK FOR LOSS: if remaining guesses=0 then the user LOST
+         // 1. count a LOSS
+         // 2. display '1' in the #LOSSES element.
+  } 
+      // when the game ends from an incorrect final guess (LOSS) OR a correct final guess (WIN) it should RESET
+         // 3. The game should immediately proceed to the next randomly-chosen word
+         // 4. the game should reset the following elements: 
+         // 4a incorrect letters should be blank
+         // 4b remaining guesses should show '10'
+         // 4c the #previous-word element should display the previous word
+  
+}
 
-            ////remainingGuesses.textContent = remainingGuesses; // display remaining guesses
-           ////console.log(remainingGuesses)
 
-/*** ACTION: If the user selects the last letter in the word CORRECTLY the game should...
-   * 1. count a WIN
-   * 2. display '1' in the #WINS element.
-   * 3. The game should immediately proceed to the next randomly-chosen word
-   * 4. the game should reset all of the other elements: 
-   * 4a incorrect letters should be blank
-   * 4b remaining guesses should show '10'
-   * 4c the #previous-word element should display the previous word */
-
-/*** ACTION: If the user runs out of guesses WITHOUT GUESSING THE WORD the game should...
- * 1. count a LOSS
- * 2. display '1' in the #LOSSES element.
- * 3. The game should immediately proceed to the next randomly-chosen word
- * 4. The game should reset all of the other elements:
- * 4a incorrect letters should be blank
- * 4b remaining guesses should show 10
- * 4c the #previous-word element should display the previous word */
   
   
