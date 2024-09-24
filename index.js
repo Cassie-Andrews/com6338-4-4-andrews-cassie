@@ -27,7 +27,6 @@ function startGame() {
   /*** When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
   wordToGuess = words[Math.floor(Math.random() * words.length)].toUpperCase();
   console.log(typeof wordToGuess);
-  document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
   console.log("Word to guess:", wordToGuess);
   console.log("Number of letters:", wordToGuess.length);
   remainingGuesses = 10;
@@ -36,7 +35,7 @@ function startGame() {
   incorrectLetters = [];
 
   // STARTING GAME STATE
-  
+  document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
   document.getElementById('incorrect-letters').textContent = ''; 
   document.getElementById('remaining-guesses').textContent = remainingGuesses; //start at 10
   document.getElementById('wins').textContent = wins;
@@ -50,16 +49,11 @@ function whenKeyPressed(e) { // access user's keypress
 
   // note: if user presses non-letter key or incorrect letter key repeatedly, there should be NO changes to the game state.
 
-  // Check if key press is a letter
-  if (!/^[A-Z]$/.test(letter)) { // !=not ^=start of string [A-Z]=uppercase letter $=end of string
+  // Check if key press is a letter OR if letter has been guessed (correct or incorrect)
+  if (!/^[A-Z]$/.test(letter) || incorrectLetters.includes(letter) || document.getElementById('word-to-guess').textContent.includes(letter)) { // !=not ^=start of string [A-Z]=uppercase letter $=end of string
     return; // if key press is not a letter, do nothing
   }
   console.log(letter) // test
-
-  // Check if letter has been guessed 
-  if (incorrectLetters.includes(letter) || document.getElementById('word-to-guess').textContent.includes(letter)) {
-    return; // if letter found in the wordToGuess text OR incorrectLetters, do nothing
-  }
 
   // if keypress is a letter AND letter has not been guessed then check if it is in the wordToGuess
   var letterFound = false;
