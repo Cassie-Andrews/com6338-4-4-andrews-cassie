@@ -1,15 +1,15 @@
 var words = [
-  'bananas', //0
-  'grapes', //1
-  'carousel', //2
-  'milkshake', //3
-  'javascript', //4
-  'limousine', //5
-  'chocolate', //6
-  'programming', //7
-  'meatloaf', //8
-  'ukulele', //9
-  'mango' //10
+  'bananas',
+  'grapes',
+  'carousel',
+  'milkshake',
+  'javascript',
+  'limousine',
+  'chocolate',
+  'programming',
+  'meatloaf',
+  'ukulele',
+  'mango'
 ]
 
 // NO EDITS ABOVE THIS POINT! //
@@ -26,6 +26,8 @@ window.onload = startGame;
 function startGame() {
   /*** When the page loads, your code should select a word at random from the provided words array and place it in the #word-to-guess element with its letters replaced with underscores. */
   wordToGuess = words[Math.floor(Math.random() * words.length)].toUpperCase();
+  console.log(typeof wordToGuess);
+  document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
   console.log("Word to guess:", wordToGuess);
   console.log("Number of letters:", wordToGuess.length);
   remainingGuesses = 10;
@@ -34,14 +36,12 @@ function startGame() {
   incorrectLetters = [];
 
   // STARTING GAME STATE
-  document.getElementById('word-to-guess').textContent = '_'.repeat(wordToGuess.length); // display one _ for each letter
-  document.getElementById('incorrect-letters').textContent = ''; //placeholder
+  
+  document.getElementById('incorrect-letters').textContent = ''; 
   document.getElementById('remaining-guesses').textContent = remainingGuesses; //start at 10
   document.getElementById('wins').textContent = wins;
   document.getElementById('losses').textContent = losses;
-  // event listener here? or just use document.onkeyup to access user key presses like in lecture? ;
 }
-
 
 document.onkeyup = whenKeyPressed;
 
